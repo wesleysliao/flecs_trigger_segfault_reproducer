@@ -8,28 +8,11 @@ FATAL: In-source builds are not allowed.
 ")
 endif()
 
-# Diable building without build type
-if(CMAKE_CONFIGURATION_TYPES)
-    set(CMAKE_CONFIGURATION_TYPES Debug Release)
-elseif(NOT CMAKE_BUILD_TYPE)
-    message(FATAL_ERROR "Missing Build Type! Run cmake with:\n-DCMAKE_BUILD_TYPE=Debug|Release")
-endif()
-
 project(APP VERSION 0.0.0 LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-add_compile_options(-D_GNU_SOURCE)
-
-if(CMAKE_BUILD_TYPE MATCHES "Debug")
-  add_compile_options(-g -O0 -da -v -Q -Wall)
-endif()
-
-if(CMAKE_BUILD_TYPE MATCHES "Release")
-  add_compile_options(-s -O3 -Wall -DNDEBUG)
-endif()
-
 
 add_subdirectory(flecs)
 
